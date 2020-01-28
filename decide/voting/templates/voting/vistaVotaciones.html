@@ -1,0 +1,80 @@
+{% load i18n static %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{% static "voting/lista.css" %}" />
+{% endblock %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Votaciones</title>
+</head>
+
+<br/>
+<header>
+        <nav>
+            <ul class='navegador'>
+                <button class="panel" role='link' onclick="window.location='/admin'">Panel de Administracion</button>
+                <button class='api' role='link' onclick="window.location='/doc'">API</button>
+                <button class='censo' role='link' onclick="window.location='/census'">Censo</button>
+                <button class='mixnet' role='link' onclick="window.location='/mixnet'">Mixnet</button>
+                <button class='post' role='link' onclick="window.location='/postproc'">Postprocesado</button>
+                <button class='almacen' role='link' onclick="window.location='/store'">Almacenamiento</button>
+                <button class='voto' role='link' onclick="window.location='/voting'">Votacion</button>
+                <button class='lista' role='link' onclick="window.location='/list'">Lsta de Votaciones</button>
+            </ul>
+        </nav>
+    </header>
+    
+<body>
+  
+{% if votaciones %}
+
+    <div class="container">
+    <table>
+
+    <tr>
+        <th>Titulo</th>
+        <th>Descripcion</th>
+        <th>Pregunta</th>
+        <th>Apertura</th>
+        <th>Cierre</th>
+        <th>Acceder</th>
+    </tr>
+
+    {% for voting in votaciones %}
+
+        <tr>
+            <td>{{ voting.name }}</td>
+            <td>{{ voting.desc }}</td>
+            <td>{{ voting.question }}</td>
+            {% if voting.start_date == None %}
+                <td> X </td>
+            {% else %}
+                <td>{{ voting.start_date }}</td>
+            {% endif %}
+            {% if voting.end_date == None %}
+                <td> X </td>
+            {% else %}
+                <td>{{ voting.end_date }}</td>
+            {% endif %}
+            {% if voting.start_date == None and voting.end_date == None %}
+                <td> X </td>
+            {% endif %}
+            {% if voting.start_date != None and voting.end_date == None %}
+                <td><a href="http://localhost:8000/booth/{{ voting.id}}">Votar</a> </td>
+            {% endif %}
+            {% if voting.start_date != None and voting.end_date != None %}
+                <td><a href="http://localhost:8000/visualizer/{{ voting.id}}">Resultados</a></td>
+            {% endif %}  
+        </tr>
+
+    {% endfor %}
+    </table>
+    <br/>
+    <button class='volver' role='link' onclick="window.location='http://localhost:8000'">Volver</button>
+    </div>
+{% else %}
+    <p>No hay votaciones.</p>
+{% endif %}
+
+</body>
