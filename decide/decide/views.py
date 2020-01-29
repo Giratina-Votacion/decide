@@ -6,6 +6,6 @@ def home(request):
 
 
 def listaVotaciones(request):
-    votaciones=Voting.objects.all()
+    votaciones=Voting.objects.all().filter(public = True)
     cuestiones=Question.objects.all()
     return render(request, 'voting/vistaVotaciones.html', {'votaciones':votaciones, 'cuestiones':cuestiones})

@@ -39,6 +39,8 @@ class QuestionOption(models.Model):
 class Voting(models.Model):
     name = models.CharField(max_length=200)
     desc = models.TextField(blank=True, null=True)
+    public = models.BooleanField(default = False)
+    public = models.BooleanField(default = False)
     question = models.ForeignKey(Question, related_name='voting', on_delete=models.CASCADE)
 
     start_date = models.DateTimeField(blank=True, null=True)
