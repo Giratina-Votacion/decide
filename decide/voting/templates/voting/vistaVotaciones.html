@@ -24,12 +24,16 @@
             </ul>
         </nav>
     </header>
+
     
 <body>
-  
+
 {% if votaciones %}
 
     <div class="container">
+    <br/> 
+    <br/>
+    <br/> 
     <table>
 
     <tr>
@@ -39,8 +43,9 @@
         <th>Apertura</th>
         <th>Cierre</th>
         <th>Acceder</th>
+        <th>Usuarios</th>
     </tr>
-
+    
     {% for voting in votaciones %}
 
         <tr>
@@ -65,7 +70,10 @@
             {% endif %}
             {% if voting.start_date != None and voting.end_date != None %}
                 <td><a href="http://localhost:8000/visualizer/{{ voting.id}}">Resultados</a></td>
-            {% endif %}  
+            {% endif %}
+                <td> <button class='usuarios' role='link' onclick="window.location='/user/{{voting.id}}'">Usuarios</button></td>
+               
+          
         </tr>
 
     {% endfor %}
