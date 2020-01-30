@@ -22,7 +22,7 @@ script:
 - coverage run --branch --source=. ./manage.py test --keepdb
 - coverage xml
 - python-codacy-coverage -r coverage.xml
-- if [[ $TRAVIS_BRANCH == master ]]; then git archive --format zip --output ./decide_release.zip develop; fi
+- if [[ $TRAVIS_BRANCH == master ]]; then git archive --format zip --output ./decide_release.zip master; fi
 before_deploy:
 - git tag $RELEASE_NAME
 deploy:
