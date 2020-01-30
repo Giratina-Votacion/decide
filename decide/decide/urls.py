@@ -28,7 +28,7 @@ urlpatterns = [
     path('gateway/', include('gateway.urls')),
     path('', views.home),
     path('list/', views.listaVotaciones),
-    path('user/<int:mundo>', views.listaUsuarios)
+    path('user/<int:id>', views.listaUsuarios)
 ]
 
 for module in settings.MODULES:
