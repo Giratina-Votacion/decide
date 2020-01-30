@@ -20,9 +20,9 @@
             {%  for cen in censo %} 
                 {% with censo=documento %} 
                     {% if cen.voting_id == censo %}
-                        {% for auth in autoridades%}
-                            {% if cen.voter_id == auth.id %}
-                            <tr><td>{{auth.name}}</td></tr>
+                        {% for user in usuarios %}
+                            {% if cen.voter_id == user.id %}
+                            <tr><td>{{user.username}}</td></tr>
                             {% endif %}
                         {% endfor %}     
                     {% endif %}
