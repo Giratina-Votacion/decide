@@ -1,0 +1,50 @@
+{% load i18n static %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{% static "voting/portada.css" %}" />
+{% endblock %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Decide</title>
+</head>
+
+<body class='cuerpo'>
+<br/>
+<br/>
+<header>
+    <nav>
+        <ul class='navegador'>
+            <button class="panel" role='link' onclick="window.location='/admin'">Panel de Administracion</button>
+            <button class='api' role='link' onclick="window.location='/doc'">API</button>
+            <button class='censo' role='link' onclick="window.location='/census'">Censo</button>
+            <button class='mixnet' role='link' onclick="window.location='/mixnet'">Mixnet</button><br/></br>
+            <button class='post' role='link' onclick="window.location='/postproc'">Postprocesado</button>
+            <button class='almacen' role='link' onclick="window.location='/store'">Almacenamiento</button>
+            <button class='voto' role='link' onclick="window.location='/voting'">Votacion</button>
+            <button class='lista' role='link' onclick="window.location='/list'">Lista de Votaciones</button>
+        </ul>
+    </nav>
+</header>
+<br/>
+
+
+    <h1>DECIDE-GIRATINA-VOTACION</h1>
+    <br/>
+
+    <div class='portada'>
+        <h2></u>Portada</u></h2>
+        <p>ID Opera: 166</p>
+        <p>Curso escolar: 2019/2020</p>
+        <p>Asignatura: Evolucion y Gestion de la Configuracion</p>
+        <p>Milestone: M4</p>
+    </div>
+
+    <div class='miembros'>
+        <h2><u>Miembros del grupo</u></h2>
+        <p>Juan Antonio de la Cruz Charro</p>
+        <p>Jose Manuel Minuesa Reyes</p>
+    </div>
+<br/>
+<br/>
+</body>

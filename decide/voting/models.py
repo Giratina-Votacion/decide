@@ -17,10 +17,18 @@ class Question(models.Model):
 class QuestionOption(models.Model):
     question = models.ForeignKey(Question, related_name='options', on_delete=models.CASCADE)
     number = models.PositiveIntegerField(blank=True, null=True)
-    option = models.TextField()
+    option = models.TextField(default = 'If you select yes/no, form will be automatically filled')
+    yes = models.BooleanField(default = False)
+    no = models.BooleanField(default = False)
 
     def save(self):
-        if not self.number:
+        if(self.yes == 1):
+            self.number = 1
+            self.option = 'Yes'
+        elif (self.no == 1):
+            self.number = 2
+            self.option = 'No'
+        elif (not self.number and self.option != 'If you select yes/no, form will be automatically filled'):
             self.number = self.question.options.count() + 2
         return super().save()
 
@@ -31,6 +39,7 @@ class QuestionOption(models.Model):
 class Voting(models.Model):
     name = models.CharField(max_length=200)
     desc = models.TextField(blank=True, null=True)
+    public = models.BooleanField(default = False)
     question = models.ForeignKey(Question, related_name='voting', on_delete=models.CASCADE)
 
     start_date = models.DateTimeField(blank=True, null=True)

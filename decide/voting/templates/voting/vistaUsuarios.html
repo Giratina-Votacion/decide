@@ -1,0 +1,39 @@
+{% load i18n static %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{% static "voting/usuarios.css" %}" />
+{% endblock %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuarios</title>
+</head>
+
+  <body>
+    <div class="container">
+    <table>
+        <tr>
+            <th>Usuarios permitidos:</th>
+        </tr>
+
+        
+            {%  for cen in censo %} 
+                {% with censo=documento %} 
+                    {% if cen.voting_id == censo %}
+                        {% for user in usuarios %}
+                            {% if cen.voter_id == user.id %}
+                            <tr><td>{{user.username}}</td></tr>
+                            {% endif %}
+                        {% endfor %}     
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        </tr>
+
+    </table>
+    <br/>
+    </div>
+
+
+
+</body>
