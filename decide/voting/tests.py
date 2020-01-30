@@ -14,11 +14,13 @@ from mixnet.mixcrypt import ElGamal
 from mixnet.mixcrypt import MixCrypt
 from mixnet.models import Auth
 from voting.models import Voting, Question, QuestionOption
-from selenium.webdriver.firefox.options import Options
+
+# Imports para selenium
+""" from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import Select
 import unittest 
 from selenium import webdriver
-import time 
+import time  """
 
 
 class VotingTestCase(BaseTestCase):
