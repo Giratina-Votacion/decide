@@ -15,15 +15,10 @@ python:
 - '3.6'
 install:
 - pip install -r requirements.txt
+- pip install codacy-coverage
 script:
 - python ./manage.py makemigrations
 - python ./manage.py migrate
-- python ./manage.py test --keepdb
-deploy:
-  provider: heroku
-  on:
-    branch: develop
-  app: giratina-votacion
-  strategy: git
-  api_key:
-    secure: m/G7U3zzPSWh0Cdl/uuoaYXcCPEG+rLXMej4+nia+wm/Ddk2UYTb+nUgFpsM2dTblcWE/ZYC7Lp48noZ0wgdEfE0xhpR7StPveu8PrAZ43VtjPV60gG4bS19CAGaHeYtDSiDOBdNgZMcPoT1Gp/D1IW1A77w0BIRnsJQEqFcA0ZMxO/lUBC/cuj9d0ajYSyAR9tvBN3+G5rygOzKn9cRBpeLCS5ZRBhyiiiXL33CJzbgncOJm0Z2/g8wYNw5aTZ/Tix1nQI3hIZbXll6MfpO+RcNLGSCpAcFnEZbEJUw/KVzpd8qQhsTfQxH+ZgrACZjvz/LKfEGHPNr4BUcBCkY0OF6q1ugSCDSi88kIRBQnee2ELskDgx/QcFYOBtaDtQqixwvq3szS+wcaP6rJUqrK2G2o8LWJGlsOg3GsDDfeKlSqoaBAJtMwhyrtUY3LgH5OMNHlzFhdMLN7JDv5HhOFZfvASz8sLfbe4glLnpQuG2SOOkcQqJiXF4Xz9anqWMEbSZDOEFk/nDB/sXOhTtsBr8kdS+JW4a5FfAVmWjM2tJstUVrgISyvikipRY7O7zwSSaxSmx/n1fvI2q/2uUkGmWR8Harcy+nsV9vrI1qAWztsVYBQaRl0hY9mdRRLvlLNVIJeLBI4LL/ZVTgmFVKHU1hjLlJAP5a5Ubhcj7PuTQ=
+- coverage run --branch --source=. ./manage.py test --keepdb
+- coverage xml
+- python-codacy-coverage -r coverage.xml
