@@ -343,6 +343,45 @@ class VotingTestCase(BaseTestCase):
         data = {'action': 'tally'}
         response = self.client.put('/voting/{}/'.format(voting.pk), data, format='json')
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json(), 'Voting already tallied')
+        self.assertEqual(response.json(), 'Voting already tallied') 
 
 
+# TESTS DE MODELOS
+
+class votacionFalse(TestCase):
+    def setUp(self):
+            super().setUp()
+            self.usuario= Auth(name='Manuel',url='http://localhost:8000/',me=True)
+            self.usuario.save()
+            self.pregunta= Question(desc='¿Crees que funcionara?')
+            self.pregunta.save()
+            self.voting = Voting(name='Votacion de Modelo', desc='Test 1 de modelo', public=False,question=self.pregunta)
+            self.voting.save()
+            self.voting.auths.add(self.usuario)
+            self.voting.save()
+
+    def tearDown(self):
+            super().tearDown()
+            self.voting = None
+
+    def test_store_census(self):
+            self.assertEqual(Voting.objects.count(), 1)
+
+class votacionTrue(TestCase):
+    def setUp(self):
+            super().setUp()
+            self.usuario= Auth(name='Manuel',url='http://localhost:8000/',me=True)
+            self.usuario.save()
+            self.pregunta= Question(desc='¿Crees que funcionara?')
+            self.pregunta.save()
+            self.voting = Voting(name='Votacion de Modelo', desc='Test 1 de modelo', public=True,question=self.pregunta)
+            self.voting.save()
+            self.voting.auths.add(self.usuario)
+            self.voting.save()
+
+    def tearDown(self):
+            super().tearDown()
+            self.voting = None
+
+    def test_store_census(self):
+            self.assertEqual(Voting.objects.count(), 1)
