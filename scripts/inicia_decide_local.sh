@@ -51,7 +51,7 @@ cd ~/decide_auto/decide
 git checkout $branch
 
 echo "Creando el archivo local_settings.py..."
-cp ~/test/settings_aux.py ~/decide_auto/decide/decide/local_settings.py
+cp ~/decide_auto/decide/scripts/settings_aux.py ~/decide_auto/decide/decide/local_settings.py
 echo "Instalando requisitos..."
 pip3 install -r ~/decide_auto/decide/requirements.txt
 
