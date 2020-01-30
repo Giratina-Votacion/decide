@@ -14,12 +14,30 @@ from locust import (
 HOST = "http://localhost:8000"
 VOTING = 1
 
+class DefHomeList(TaskSet):
+
+    @task
+    def index(self):
+        self.client.get("/".format(VOTING))
 
 class DefVisualizer(TaskSet):
 
     @task
     def index(self):
         self.client.get("/visualizer/{0}/".format(VOTING))
+
+class DefVotingList(TaskSet):
+
+    @task
+    def index(self):
+        self.client.get("/list")
+
+
+class DefVotingUsersList(TaskSet):
+
+    @task
+    def index(self):
+        self.client.get("/user/{0}".format(VOTING))
 
 
 class DefVoters(TaskSequence):
@@ -64,7 +82,41 @@ class DefVoters(TaskSequence):
 class Visualizer(HttpLocust):
     host = HOST
     task_set = DefVisualizer
+    last_wait_time = 0
 
+    def wait_time(self):
+        self.last_wait_time += 1
+        return self.last_wait_time
+
+class HomeList(HttpLocust):
+    host = HOST
+    task_set = DefHomeList
+
+    last_wait_time = 0
+
+    def wait_time(self):
+        self.last_wait_time += 1
+        return self.last_wait_time
+
+class VotingList(HttpLocust):
+    host = HOST
+    task_set = DefVotingList
+
+    last_wait_time = 0
+
+    def wait_time(self):
+        self.last_wait_time += 1
+        return self.last_wait_time
+
+class VotingUsersList(HttpLocust):
+    host = HOST
+    task_set = DefVotingUsersList
+
+    last_wait_time = 0
+
+    def wait_time(self):
+        self.last_wait_time += 1
+        return self.last_wait_time
 
 class Voters(HttpLocust):
     host = HOST
